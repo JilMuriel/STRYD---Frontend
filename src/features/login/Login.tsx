@@ -1,9 +1,10 @@
 import StravaIcon from '../../assets/logo/strava-icon.svg'
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Login = () => {
-
+  
   const handleLogin = () => {
-    window.location.href = "https://stryd-backend.onrender.com/api/auth/strava";
+    window.location.href = `${API_URL}/auth/strava`;
   };
 
   return (
