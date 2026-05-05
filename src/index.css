@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+.recharts-wrapper:focus {
+  outline: none;
+}
+
+@layer base {
+  html {
+    font-family: "Inter", sans-serif;
+    line-height: normal;
+  }
+}
