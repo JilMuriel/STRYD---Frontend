@@ -1,6 +1,14 @@
+import { logout } from "../../api/auth";
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
-    const handleLogout = () => {
-        window.location.href = "https://stryd-backend.onrender.com/api/auth/logout";
+    const handleLogout = async () => {
+        try {
+            await logout();
+        } catch (error) {
+            console.error("Logout failed:", error);
+        } finally {
+            window.location.href = "/";
+        }
     };
 
     return (
