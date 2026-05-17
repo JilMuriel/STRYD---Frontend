@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>STRYD Cycling Progress App - Dashboard</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap"
+                rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+                rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+                rel="stylesheet" />
+        <script id="tailwind-config">
+                tailwind.config = {
+                        darkMode: "class",
+                        theme: {
+                                extend: {
+                                        "colors": {
+                                                "tertiary-container": "#9ea6b5",
+                                                "on-error-container": "#93000a",
+                                                "tertiary-fixed-dim": "#bfc7d6",
+                                                "surface-container": "#eaefed",
+                                                "on-secondary-fixed": "#410005",
+                                                "outline": "#6d7a77",
+                                                "on-secondary": "#ffffff",
+                                                "surface": "#f6faf8",
+                                                "on-tertiary-fixed-variant": "#3f4754",
+                                                "error-container": "#ffdad6",
+                                                "surface-bright": "#f6faf8",
+                                                "tertiary-fixed": "#dbe3f3",
+                                                "surface-dim": "#d6dbd9",
+                                                "primary": "#006a63",
+                                                "on-secondary-fixed-variant": "#8d131b",
+                                                "on-tertiary-fixed": "#141c27",
+                                                "secondary": "#af2e30",
+                                                "inverse-primary": "#71d7cd",
+                                                "on-tertiary-container": "#343c48",
+                                                "background": "#f6faf8",
+                                                "on-secondary-container": "#69000c",
+                                                "tertiary": "#575f6c",
+                                                "primary-fixed-dim": "#71d7cd",
+                                                "on-surface": "#171d1c",
+                                                "on-primary-container": "#00433f",
+                                                "error": "#ba1a1a",
+                                                "on-primary-fixed-variant": "#00504a",
+                                                "surface-container-high": "#e4e9e7",
+                                                "on-background": "#171d1c",
+                                                "on-error": "#ffffff",
+                                                "primary-container": "#4db6ac",
+                                                "outline-variant": "#bdc9c6",
+                                                "surface-container-highest": "#dfe3e2",
+                                                "secondary-fixed-dim": "#ffb3ae",
+                                                "secondary-container": "#fd6764",
+                                                "surface-container-lowest": "#ffffff",
+                                                "surface-variant": "#dfe3e2",
+                                                "inverse-surface": "#2c3130",
+                                                "surface-tint": "#006a63",
+                                                "surface-container-low": "#f0f5f3",
+                                                "on-tertiary": "#ffffff",
+                                                "inverse-on-surface": "#edf2f0",
+                                                "primary-fixed": "#8ef4e9",
+                                                "on-surface-variant": "#3d4947",
+                                                "on-primary-fixed": "#00201d",
+                                                "secondary-fixed": "#ffdad7",
+                                                "on-primary": "#ffffff"
+                                        },
+                                        "borderRadius": {
+                                                "DEFAULT": "0.25rem",
+                                                "lg": "0.5rem",
+                                                "xl": "0.75rem",
+                                                "full": "9999px"
+                                        },
+                                        "spacing": {
+                                                "gutter": "24px",
+                                                "md": "16px",
+                                                "lg": "24px",
+                                                "xs": "4px",
+                                                "unit": "4px",
+                                                "xl": "48px",
+                                                "sm": "8px",
+                                                "container-padding": "32px"
+                                        },
+                                        "fontFamily": {
+                                                "h1": [
+                                                        "Inter"
+                                                ],
+                                                "body-sm": [
+                                                        "Inter"
+                                                ],
+                                                "body-lg": [
+                                                        "Inter"
+                                                ],
+                                                "label-caps": [
+                                                        "Inter"
+                                                ],
+                                                "h3": [
+                                                        "Inter"
+                                                ],
+                                                "data-point": [
+                                                        "Inter"
+                                                ],
+                                                "h2": [
+                                                        "Inter"
+                                                ],
+                                                "body-md": [
+                                                        "Inter"
+                                                ],
+                                                "display": [
+                                                        "Inter"
+                                                ]
+                                        },
+                                        "fontSize": {
+                                                "h1": [
+                                                        "32px",
+                                                        {
+                                                                "lineHeight": "1.2",
+                                                                "letterSpacing": "-0.01em",
+                                                                "fontWeight": "600"
+                                                        }
+                                                ],
+                                                "body-sm": [
+                                                        "14px",
+                                                        {
+                                                                "lineHeight": "1.5",
+                                                                "fontWeight": "400"
+                                                        }
+                                                ],
+                                                "body-lg": [
+                                                        "18px",
+                                                        {
+                                                                "lineHeight": "1.6",
+                                                                "fontWeight": "400"
+                                                        }
+                                                ],
+                                                "label-caps": [
+                                                        "12px",
+                                                        {
+                                                                "lineHeight": "1",
+                                                                "letterSpacing": "0.05em",
+                                                                "fontWeight": "600"
+                                                        }
+                                                ],
+                                                "h3": [
+                                                        "20px",
+                                                        {
+                                                                "lineHeight": "1.4",
+                                                                "fontWeight": "600"
+                                                        }
+                                                ],
+                                                "data-point": [
+                                                        "28px",
+                                                        {
+                                                                "lineHeight": "1",
+                                                                "letterSpacing": "-0.01em",
+                                                                "fontWeight": "700"
+                                                        }
+                                                ],
+                                                "h2": [
+                                                        "24px",
+                                                        {
+                                                                "lineHeight": "1.3",
+                                                                "fontWeight": "600"
+                                                        }
+                                                ],
+                                                "body-md": [
+                                                        "16px",
+                                                        {
+                                                                "lineHeight": "1.5",
+                                                                "fontWeight": "400"
+                                                        }
+                                                ],
+                                                "display": [
+                                                        "48px",
+                                                        {
+                                                                "lineHeight": "1.1",
+                                                                "letterSpacing": "-0.02em",
+                                                                "fontWeight": "700"
+                                                        }
+                                                ]
+                                        }
+                                },
+                        },
+                }
+        </script>
+        <style>
+                body {
+                        background-color: #f6faf8;
+                        /* background color from config */
+                }
+        </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md min-h-screen flex overflow-hidden">
+        <!-- Left: Narrow navigation sidebar -->
+        <nav
+                class="bg-surface dark:bg-surface-dim fixed left-0 top-0 h-full w-[96px] flex flex-col items-center py-xl shadow-[20px_0_40px_rgba(0,0,0,0.03)] dark:shadow-none shadow-sm z-50">
+                <!-- Header / Logo -->
+                <div class="mb-xl flex flex-col items-center justify-center">
+                        <div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center mb-sm">
+                                <span class="material-symbols-outlined text-on-primary-container"
+                                        style="font-variation-settings: 'FILL' 1;">pedal_bike</span>
+                        </div>
+                        <span class="font-display text-h2 font-bold text-primary dark:text-primary-fixed">STRYD</span>
+                        <span class="font-label-caps text-label-caps text-on-surface-variant">Elite</span>
+                </div>
+                <!-- Navigation Tabs -->
+                <div class="flex flex-col justify-between items-center h-full space-y-lg flex-grow">
+                        <div class="flex flex-col gap-lg items-center">
+                                <!-- Dashboard (Active) -->
+                                <a class="flex flex-col items-center gap-sm group text-primary dark:text-primary-fixed-dim font-bold scale-110 transition-transform"
+                                        href="#">
+                                        <div
+                                                class="p-sm rounded-xl bg-primary-container/20 group-hover:bg-surface-container-low dark:group-hover:bg-surface-container-highest transition-all duration-300">
+                                                <span class="material-symbols-outlined" data-icon="dashboard"
+                                                        style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                                        </div>
+                                        <span class="font-label-caps text-label-caps">Dashboard</span>
+                                </a>
+                                <!-- Activities -->
+                                <a class="flex flex-col items-center gap-sm group text-outline dark:text-outline-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-xl transition-all duration-300 p-sm"
+                                        href="#">
+                                        <span class="material-symbols-outlined"
+                                                data-icon="directions_bike">directions_bike</span>
+                                        <span class="font-label-caps text-label-caps mt-xs">Activities</span>
+                                </a>
+                                <!-- Analytics -->
+                                <a class="flex flex-col items-center gap-sm group text-outline dark:text-outline-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-xl transition-all duration-300 p-sm"
+                                        href="#">
+                                        <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                                        <span class="font-label-caps text-label-caps mt-xs">Analytics</span>
+                                </a>
+                                <!-- Settings -->
+                                <a class="flex flex-col items-center gap-sm group text-outline dark:text-outline-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-xl transition-all duration-300 p-sm"
+                                        href="#">
+                                        <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                                        <span class="font-label-caps text-label-caps mt-xs">Settings</span>
+                                </a>
+                        </div>
+                        <!-- Footer Profile -->
+                        <div class="mt-auto">
+                                <a class="flex flex-col items-center gap-sm group text-outline dark:text-outline-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-xl transition-all duration-300 p-sm"
+                                        href="#">
+                                        <img alt="Profile"
+                                                class="w-10 h-10 rounded-full object-cover border-2 border-surface"
+                                                data-alt="Close up portrait of an athletic cyclist wearing modern dark navy and teal cycling gear, looking focused. The background is a very minimal, bright, light gray studio setting highlighting the subject. The lighting is crisp and professional, fitting a high-end sports performance app aesthetic."
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNWKDrALeRQDNMkhBkFW_7BI26x4bolK5zqX0UT6h7y0gwqms5pDj5PKySCdVrZ5POsqqhgqw4_Eaz2lj_5aaw-QPfhtnqxrWnC9q3FVK0dgX6A7mJlE1y77L3SyLi9vZfgqn6mQnxlT6X4R4ur_AikY9oK6xojIHgMwoI3zVnqoTNttzFZNoasavDxgM1J6LP_vy3XtzGosT5_OAuUqjNpi21u0JydxufN8eu1bospry_Z9eCoFRSEFTPFnvUwGGzSWbsTLiVqcg" />
+                                        <span class="font-label-caps text-label-caps mt-xs">Profile</span>
+                                </a>
+                        </div>
+                </div>
+        </nav>
+        <!-- Main Content Area -->
+        <main class="ml-[96px] mr-[300px] flex-1 h-screen overflow-y-auto px-container-padding py-xl">
+                <div class="max-w-[1200px] mx-auto space-y-lg">
+                        <!-- Page Header -->
+                        <header class="flex justify-between items-end mb-xl">
+                                <div>
+                                        <h1 class="font-h1 text-h1 text-on-background mb-xs">Cycling Progress</h1>
+                                        <p class="font-body-md text-body-md text-on-surface-variant">Your performance
+                                                analytics at a glance.</p>
+                                </div>
+                                <div class="flex gap-md">
+                                        <button
+                                                class="h-12 px-lg rounded-full bg-secondary-container/10 text-secondary font-body-md text-body-md font-semibold hover:bg-secondary-container/20 transition-colors flex items-center gap-sm">
+                                                <span class="material-symbols-outlined text-sm">download</span> Export
+                                        </button>
+                                        <button
+                                                class="h-12 px-lg rounded-full bg-primary-container text-on-primary-container font-body-md text-body-md font-semibold hover:opacity-90 transition-opacity shadow-[0_4px_12px_rgba(77,182,172,0.2)]">
+                                                Add Workout
+                                        </button>
+                                </div>
+                        </header>
+                        <!-- Top: Performance Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                                <!-- Fitness Card -->
+                                <div
+                                        class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_20px_40px_rgba(23,29,28,0.03)] flex flex-col relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                                        <div class="flex justify-between items-start mb-md z-10">
+                                                <div class="flex items-center gap-sm">
+                                                        <div
+                                                                class="w-8 h-8 rounded-full bg-primary-container/10 flex items-center justify-center">
+                                                                <span
+                                                                        class="material-symbols-outlined text-primary text-sm">trending_up</span>
+                                                        </div>
+                                                        <span
+                                                                class="font-body-md text-body-md font-semibold text-on-surface">Fitness
+                                                                (CTL)</span>
+                                                </div>
+                                                <span
+                                                        class="inline-flex items-center px-sm py-xs rounded-full bg-primary-container/10 text-primary font-label-caps text-label-caps">+3.2</span>
+                                        </div>
+                                        <div class="mt-auto z-10">
+                                                <span
+                                                        class="font-data-point text-data-point text-on-background">104.5</span>
+                                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">
+                                                        Target: 110 by May</p>
+                                        </div>
+                                        <!-- Decorative subtle line chart bg -->
+                                        <svg class="absolute bottom-0 left-0 w-full h-1/2 opacity-20 text-primary-container"
+                                                preserveaspectratio="none" viewbox="0 0 100 50">
+                                                <path d="M0,50 L0,40 Q25,30 50,35 T100,20 L100,50 Z"
+                                                        fill="currentColor"></path>
+                                                <path d="M0,40 Q25,30 50,35 T100,20" fill="none" stroke="currentColor"
+                                                        stroke-width="2"></path>
+                                        </svg>
+                                </div>
+                                <!-- Fatigue Card -->
+                                <div
+                                        class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_20px_40px_rgba(23,29,28,0.03)] flex flex-col relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                                        <div class="flex justify-between items-start mb-md z-10">
+                                                <div class="flex items-center gap-sm">
+                                                        <div
+                                                                class="w-8 h-8 rounded-full bg-secondary-container/10 flex items-center justify-center">
+                                                                <span
+                                                                        class="material-symbols-outlined text-secondary text-sm">battery_charging_20</span>
+                                                        </div>
+                                                        <span
+                                                                class="font-body-md text-body-md font-semibold text-on-surface">Fatigue
+                                                                (ATL)</span>
+                                                </div>
+                                                <span
+                                                        class="inline-flex items-center px-sm py-xs rounded-full bg-secondary-container/10 text-secondary font-label-caps text-label-caps">+12.4</span>
+                                        </div>
+                                        <div class="mt-auto z-10">
+                                                <span
+                                                        class="font-data-point text-data-point text-on-background">128.2</span>
+                                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">High
+                                                        training load</p>
+                                        </div>
+                                        <!-- Decorative subtle line chart bg -->
+                                        <svg class="absolute bottom-0 left-0 w-full h-1/2 opacity-20 text-secondary-container"
+                                                preserveaspectratio="none" viewbox="0 0 100 50">
+                                                <path d="M0,50 L0,45 L20,35 L40,40 L60,20 L80,30 L100,10 L100,50 Z"
+                                                        fill="currentColor"></path>
+                                                <path d="M0,45 L20,35 L40,40 L60,20 L80,30 L100,10" fill="none"
+                                                        stroke="currentColor" stroke-dasharray="4,4" stroke-width="2">
+                                                </path>
+                                        </svg>
+                                </div>
+                                <!-- Form Card -->
+                                <div
+                                        class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_20px_40px_rgba(23,29,28,0.03)] flex flex-col relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                                        <div class="flex justify-between items-start mb-md z-10">
+                                                <div class="flex items-center gap-sm">
+                                                        <div
+                                                                class="w-8 h-8 rounded-full bg-tertiary-container/20 flex items-center justify-center">
+                                                                <span
+                                                                        class="material-symbols-outlined text-on-tertiary-container text-sm">water_drop</span>
+                                                        </div>
+                                                        <span
+                                                                class="font-body-md text-body-md font-semibold text-on-surface">Form
+                                                                (TSB)</span>
+                                                </div>
+                                                <span
+                                                        class="inline-flex items-center px-sm py-xs rounded-full bg-tertiary-container/20 text-on-tertiary-container font-label-caps text-label-caps">-23.7</span>
+                                        </div>
+                                        <div class="mt-auto z-10">
+                                                <span
+                                                        class="font-data-point text-data-point text-on-background">-23.7</span>
+                                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">
+                                                        Optimal training zone</p>
+                                        </div>
+                                        <!-- Decorative subtle line chart bg -->
+                                        <svg class="absolute bottom-0 left-0 w-full h-1/2 opacity-10 text-on-tertiary-container"
+                                                preserveaspectratio="none" viewbox="0 0 100 50">
+                                                <path d="M0,50 L0,25 Q25,20 50,30 T100,25 L100,50 Z"
+                                                        fill="currentColor"></path>
+                                                <path d="M0,25 Q25,20 50,30 T100,25" fill="none" stroke="currentColor"
+                                                        stroke-width="2"></path>
+                                        </svg>
+                                </div>
+                        </div>
+                        <!-- Middle: Performance Trends Chart -->
+                        <div
+                                class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_20px_40px_rgba(23,29,28,0.03)] mt-lg">
+                                <div class="flex justify-between items-center mb-xl">
+                                        <h2 class="font-h3 text-h3 text-on-surface">Performance Trends</h2>
+                                        <!-- Filters -->
+                                        <div class="flex bg-surface-container-low rounded-lg p-xs">
+                                                <button
+                                                        class="px-md py-sm rounded-md font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors">2W</button>
+                                                <button
+                                                        class="px-md py-sm rounded-md font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors">1M</button>
+                                                <button
+                                                        class="px-md py-sm rounded-md bg-surface-container-lowest text-primary font-label-caps text-label-caps shadow-sm">3M</button>
+                                                <button
+                                                        class="px-md py-sm rounded-md font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors">6M</button>
+                                        </div>
+                                </div>
+                                <!-- Abstract Chart Visualization -->
+                                <div class="h-[300px] w-full relative flex items-end mb-md">
+                                        <!-- Y-Axis labels -->
+                                        <div
+                                                class="absolute left-0 h-full flex flex-col justify-between text-on-surface-variant font-label-caps text-label-caps text-[10px] pb-6 pr-2">
+                                                <span>150</span>
+                                                <span>100</span>
+                                                <span>50</span>
+                                                <span>0</span>
+                                                <span>-50</span>
+                                        </div>
+                                        <!-- Chart Grid -->
+                                        <div class="absolute left-8 right-0 h-full flex flex-col justify-between pb-6">
+                                                <div class="w-full h-[1px] bg-outline-variant/30"></div>
+                                                <div class="w-full h-[1px] bg-outline-variant/30"></div>
+                                                <div class="w-full h-[1px] bg-outline-variant/30"></div>
+                                                <div class="w-full h-[1px] bg-outline-variant/30"></div>
+                                                <div class="w-full h-[1px] bg-outline-variant/30"></div>
+                                        </div>
+                                        <!-- SVG Lines (Fitness, Fatigue, Form) -->
+                                        <div class="absolute left-8 right-0 h-full pb-6 overflow-hidden">
+                                                <svg class="w-full h-full" preserveaspectratio="none"
+                                                        viewbox="0 0 1000 300">
+                                                        <!-- Form (TSB) - Bar Chart in background -->
+                                                        <g fill="rgba(52, 60, 72, 0.1)"
+                                                                transform="translate(0, 200) scale(1, -1)">
+                                                                <rect height="10" width="20" x="0" y="0"></rect>
+                                                                <rect height="25" width="20" x="40" y="0"></rect>
+                                                                <rect fill="rgba(253, 103, 100, 0.1)" height="-15"
+                                                                        width="20" x="80" y="0"></rect>
+                                                                <rect fill="rgba(253, 103, 100, 0.1)" height="-30"
+                                                                        width="20" x="120" y="0"></rect>
+                                                                <rect fill="rgba(253, 103, 100, 0.1)" height="-40"
+                                                                        width="20" x="160" y="0"></rect>
+                                                                <rect fill="rgba(253, 103, 100, 0.1)" height="-20"
+                                                                        width="20" x="200" y="0"></rect>
+                                                                <rect height="5" width="20" x="240" y="0"></rect>
+                                                                <rect height="15" width="20" x="280" y="0"></rect>
+                                                                <!-- ... more bars representing daily TSB -->
+                                                                <rect fill="rgba(253, 103, 100, 0.2)" height="-23"
+                                                                        width="20" x="900" y="0"></rect>
+                                                                <rect fill="rgba(253, 103, 100, 0.2)" height="-25"
+                                                                        width="20" x="940" y="0"></rect>
+                                                                <rect fill="rgba(253, 103, 100, 0.3)" height="-23.7"
+                                                                        width="20" x="980" y="0"></rect>
+                                                        </g>
+                                                        <!-- Fatigue (ATL) - Coral dashed line -->
+                                                        <path d="M0,250 Q100,230 200,150 T400,180 T600,100 T800,140 T1000,80"
+                                                                fill="none" stroke="#fd6764" stroke-dasharray="8,8"
+                                                                stroke-width="3"></path>
+                                                        <!-- Fitness (CTL) - Teal solid line with gradient fill beneath -->
+                                                        <path d="M0,280 C200,280 300,240 500,220 C700,200 800,150 1000,120 L1000,300 L0,300 Z"
+                                                                fill="url(#teal-grad)" opacity="0.2"></path>
+                                                        <path d="M0,280 C200,280 300,240 500,220 C700,200 800,150 1000,120"
+                                                                fill="none" stroke="#4db6ac" stroke-width="4"></path>
+                                                        <!-- Current value dot for Fitness -->
+                                                        <circle cx="1000" cy="120" fill="#006a63" r="6" stroke="#ffffff"
+                                                                stroke-width="2"></circle>
+                                                        <defs>
+                                                                <lineargradient id="teal-grad" x1="0" x2="0" y1="0"
+                                                                        y2="1">
+                                                                        <stop offset="0%" stop-color="#4db6ac"
+                                                                                stop-opacity="1"></stop>
+                                                                        <stop offset="100%" stop-color="#4db6ac"
+                                                                                stop-opacity="0"></stop>
+                                                                </lineargradient>
+                                                        </defs>
+                                                </svg>
+                                        </div>
+                                        <!-- X-Axis labels -->
+                                        <div
+                                                class="absolute left-8 right-0 bottom-0 flex justify-between text-on-surface-variant font-label-caps text-label-caps text-[10px] pt-2">
+                                                <span>Jan 1</span>
+                                                <span>Jan 15</span>
+                                                <span>Feb 1</span>
+                                                <span>Feb 15</span>
+                                                <span>Mar 1</span>
+                                                <span>Today</span>
+                                        </div>
+                                </div>
+                                <!-- Legend -->
+                                <div class="flex justify-center gap-xl mt-md">
+                                        <div class="flex items-center gap-sm">
+                                                <div class="w-3 h-3 rounded-full bg-primary-container"></div>
+                                                <span class="font-label-caps text-label-caps text-on-surface">Fitness
+                                                        (CTL)</span>
+                                        </div>
+                                        <div class="flex items-center gap-sm">
+                                                <div class="w-3 h-3 rounded-full bg-secondary-container border border-secondary-container"
+                                                        style="border-style: dashed;"></div>
+                                                <span class="font-label-caps text-label-caps text-on-surface">Fatigue
+                                                        (ATL)</span>
+                                        </div>
+                                        <div class="flex items-center gap-sm">
+                                                <div class="w-3 h-3 bg-on-tertiary-container/20"></div>
+                                                <span class="font-label-caps text-label-caps text-on-surface">Form
+                                                        (TSB)</span>
+                                        </div>
+                                </div>
+                        </div>
+                        <!-- Bottom: Recent Activities Table -->
+                        <div
+                                class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_20px_40px_rgba(23,29,28,0.03)] mt-lg mb-xl">
+                                <div class="flex justify-between items-center mb-lg">
+                                        <h2 class="font-h3 text-h3 text-on-surface">Recent Activities</h2>
+                                        <a class="font-body-sm text-body-sm text-primary hover:text-primary-fixed-dim font-semibold flex items-center gap-xs"
+                                                href="#">
+                                                View All <span
+                                                        class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                                        </a>
+                                </div>
+                                <div class="w-full overflow-x-auto">
+                                        <table class="w-full text-left border-collapse">
+                                                <thead>
+                                                        <tr class="border-b border-outline-variant/30">
+                                                                <th
+                                                                        class="pb-sm font-label-caps text-label-caps text-on-surface-variant font-semibold">
+                                                                        Title</th>
+                                                                <th
+                                                                        class="pb-sm font-label-caps text-label-caps text-on-surface-variant font-semibold">
+                                                                        Date</th>
+                                                                <th
+                                                                        class="pb-sm font-label-caps text-label-caps text-on-surface-variant font-semibold text-right">
+                                                                        Distance</th>
+                                                                <th
+                                                                        class="pb-sm font-label-caps text-label-caps text-on-surface-variant font-semibold text-right">
+                                                                        TSS</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr
+                                                                class="group hover:bg-surface-container-low transition-colors border-b border-outline-variant/10">
+                                                                <td class="py-md flex items-center gap-md">
+                                                                        <div
+                                                                                class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary">
+                                                                                <span
+                                                                                        class="material-symbols-outlined text-sm">landscape</span>
+                                                                        </div>
+                                                                        <div>
+                                                                                <div
+                                                                                        class="font-body-md text-body-md text-on-surface font-semibold">
+                                                                                        Hills Intervals</div>
+                                                                                <div
+                                                                                        class="font-body-sm text-body-sm text-on-surface-variant">
+                                                                                        Outdoor Ride</div>
+                                                                        </div>
+                                                                </td>
+                                                                <td
+                                                                        class="py-md font-body-sm text-body-sm text-on-surface-variant">
+                                                                        Today, 06:30 AM</td>
+                                                                <td
+                                                                        class="py-md font-body-md text-body-md text-on-surface text-right font-semibold">
+                                                                        45.2 km</td>
+                                                                <td class="py-md text-right">
+                                                                        <span
+                                                                                class="inline-flex items-center justify-center min-w-[40px] px-sm py-xs rounded-full bg-secondary-container/10 text-secondary font-label-caps text-label-caps font-bold">112</span>
+                                                                </td>
+                                                        </tr>
+                                                        <tr
+                                                                class="group hover:bg-surface-container-low transition-colors border-b border-outline-variant/10">
+                                                                <td class="py-md flex items-center gap-md">
+                                                                        <div
+                                                                                class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface">
+                                                                                <span
+                                                                                        class="material-symbols-outlined text-sm">home</span>
+                                                                        </div>
+                                                                        <div>
+                                                                                <div
+                                                                                        class="font-body-md text-body-md text-on-surface font-semibold">
+                                                                                        Z2 Endurance Sweep</div>
+                                                                                <div
+                                                                                        class="font-body-sm text-body-sm text-on-surface-variant">
+                                                                                        Indoor Trainer</div>
+                                                                        </div>
+                                                                </td>
+                                                                <td
+                                                                        class="py-md font-body-sm text-body-sm text-on-surface-variant">
+                                                                        Yesterday, 17:45 PM</td>
+                                                                <td
+                                                                        class="py-md font-body-md text-body-md text-on-surface text-right font-semibold">
+                                                                        32.0 km</td>
+                                                                <td class="py-md text-right">
+                                                                        <span
+                                                                                class="inline-flex items-center justify-center min-w-[40px] px-sm py-xs rounded-full bg-primary-container/10 text-primary font-label-caps text-label-caps font-bold">58</span>
+                                                                </td>
+                                                        </tr>
+                                                        <tr
+                                                                class="group hover:bg-surface-container-low transition-colors">
+                                                                <td class="py-md flex items-center gap-md">
+                                                                        <div
+                                                                                class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary">
+                                                                                <span
+                                                                                        class="material-symbols-outlined text-sm">group</span>
+                                                                        </div>
+                                                                        <div>
+                                                                                <div
+                                                                                        class="font-body-md text-body-md text-on-surface font-semibold">
+                                                                                        Sunday Club Run</div>
+                                                                                <div
+                                                                                        class="font-body-sm text-body-sm text-on-surface-variant">
+                                                                                        Group Ride</div>
+                                                                        </div>
+                                                                </td>
+                                                                <td
+                                                                        class="py-md font-body-sm text-body-sm text-on-surface-variant">
+                                                                        Mar 10, 08:00 AM</td>
+                                                                <td
+                                                                        class="py-md font-body-md text-body-md text-on-surface text-right font-semibold">
+                                                                        102.5 km</td>
+                                                                <td class="py-md text-right">
+                                                                        <span
+                                                                                class="inline-flex items-center justify-center min-w-[40px] px-sm py-xs rounded-full bg-secondary-container/20 text-secondary font-label-caps text-label-caps font-bold">245</span>
+                                                                </td>
+                                                        </tr>
+                                                </tbody>
+                                        </table>
+                                </div>
+                        </div>
+                </div>
+        </main>
+        <!-- Right: AI Insights panel (SideNavBar Drawer type) -->
+        <aside
+                class="bg-surface dark:bg-surface-dim fixed right-0 top-0 h-full w-[300px] p-lg shadow-[-20px_0_40px_rgba(0,0,0,0.03)] dark:shadow-none shadow-sm z-40 overflow-y-auto border-l border-outline-variant/10">
+                <!-- Drawer Header -->
+                <div class="mb-xl flex flex-col gap-sm">
+                        <span class="font-h3 text-h3 font-bold text-on-surface">Performance Engine</span>
+                        <span class="font-label-caps text-label-caps text-secondary dark:text-secondary-fixed">AI
+                                Analysis</span>
+                </div>
+                <div class="flex flex-col gap-md h-full pb-xl">
+                        <!-- Insight Tabs (from JSON styling) -->
+                        <div class="flex flex-col gap-sm mb-lg">
+                                <a class="flex items-center gap-md bg-secondary-container/10 text-secondary dark:text-secondary-fixed rounded-xl p-md font-body-md font-semibold"
+                                        href="#">
+                                        <span class="material-symbols-outlined"
+                                                data-icon="calendar_month">calendar_month</span>
+                                        Weekly Summary
+                                </a>
+                                <a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all p-md font-body-md"
+                                        href="#">
+                                        <span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+                                        AI Insights
+                                </a>
+                                <a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all p-md font-body-md"
+                                        href="#">
+                                        <span class="material-symbols-outlined" data-icon="rejuvenate">refresh</span>
+                                        Recovery
+                                </a>
+                        </div>
+                        <hr class="border-outline-variant/20 mb-sm" />
+                        <!-- Dynamic Content Area -->
+                        <!-- Insight Card 1 -->
+                        <div
+                                class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/10">
+                                <div class="flex items-center gap-sm mb-sm text-primary">
+                                        <span class="material-symbols-outlined text-sm">bolt</span>
+                                        <span class="font-label-caps text-label-caps">Fitness Gains</span>
+                                </div>
+                                <p class="font-body-md text-body-md text-on-surface mb-xs font-semibold">Your fitness
+                                        improved by 12%</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Consistent Z2 work over the
+                                        last 3 weeks is showing positive physiological adaptations. Base is solidifying.
+                                </p>
+                        </div>
+                        <!-- Insight Card 2 (Recovery) -->
+                        <div
+                                class="bg-secondary-container/5 p-md rounded-xl shadow-sm border border-secondary-container/10 mt-sm">
+                                <div class="flex items-center gap-sm mb-sm text-secondary">
+                                        <span class="material-symbols-outlined text-sm">medical_services</span>
+                                        <span class="font-label-caps text-label-caps">Recovery Alert</span>
+                                </div>
+                                <p class="font-body-md text-body-md text-on-surface mb-xs font-semibold">Consider a
+                                        recovery ride tomorrow.</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Form (TSB) is dipping low
+                                        (-23.7). A 45 min light spin under 120W will accelerate flush-out without adding
+                                        fatigue.</p>
+                        </div>
+                        <!-- CTA -->
+                        <div class="mt-auto pt-lg">
+                                <button
+                                        class="w-full h-12 rounded-xl bg-on-surface text-surface font-body-md text-body-md font-bold hover:bg-on-surface-variant transition-colors flex justify-center items-center gap-sm">
+                                        <span class="material-symbols-outlined text-sm">tune</span> Optimise Training
+                                </button>
+                        </div>
+                </div>
+        </aside>
+</body>
+
+</html>
