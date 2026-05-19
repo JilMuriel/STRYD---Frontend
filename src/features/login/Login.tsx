@@ -1,6 +1,6 @@
 import StravaIcon from '../../assets/logo/strava-icon.svg';
-import LeftBackground from './asset/bg-left.jpg';
 import StrydIcon from './asset/stryd-icon.svg';
+import LeftBackground from './asset/bg-left.jpg';
 import LockIcon from './asset/lock.svg'
 
 const API_URL = import.meta.env.VITE_API_URL;
