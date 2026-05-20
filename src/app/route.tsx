@@ -1,9 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Dashboard from "../features/dashboard/DashboardPage";
 import Login from "../features/login/Login";
 import ProtectedRoute from "./ProtectedRoute";
 import ActivityDetails from "../features/activities/ActivityDetailsPage";
 import { AppLayout } from "../shared/components/app-layout";
+import ActivitiesPage from "../features/activities/ActivitiesPage";
+import AnalyticsPage from "../features/analytics/AnalyticsPage";
+import SettingsPage from "../features/settings/SettingsPage";
 
 export const router = createBrowserRouter([
     {
@@ -12,27 +16,57 @@ export const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: (
-            <ProtectedRoute>
-                <AppLayout >
-                    <Dashboard />
-                </AppLayout >
-            </ProtectedRoute>
-        ),
+        element: <Navigate to="/app/dashboard" replace />,
     },
     {
-        path: '/test',
+        path: "/activities",
+        element: <Navigate to="/app/activities" replace />,
+    },
+    {
+        path: "/analytics",
+        element: <Navigate to="/app/analytics" replace />,
+    },
+    {
+        path: "/settings",
+        element: <Navigate to="/app/settings" replace />,
+    },
+    {
+        path: "/app",
         element: (
-            <AppLayout />
-        )
+            <ProtectedRoute>
+                <AppLayout />
+            </ProtectedRoute>
+        ),
+        children: [
+            {
+                index: true,
+                element: <Dashboard />,
+            },
+            {
+                path: "dashboard",
+                element: <Dashboard />,
+            },
+            {
+                path: "activities",
+                element: <ActivitiesPage />,
+            },
+            {
+                path: "analytics",
+                element: <AnalyticsPage />,
+            },
+            {
+                path: "settings",
+                element: <SettingsPage />,
+            },
+        ],
     },
     {
         path: "/activities/:id",
         element: (
             <ProtectedRoute>
-                <AppLayout >
+                <AppLayout>
                     <ActivityDetails />
-                </AppLayout >
+                </AppLayout>
             </ProtectedRoute>
         ),
     },

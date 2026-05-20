@@ -15,7 +15,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <div className="min-h-screen container mx-auto bg-gray-50 text-gray-900">
 
             {/* Header */}
-            <header className="flex justify-between items-center p-4">
+            {/* <header className="flex justify-between items-center p-4">
                 <h1 className="text-lg font-semibold">STRYD</h1>
 
                 <button
@@ -24,7 +24,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 >
                     Logout
                 </button>
-            </header>
+            </header> */}
 
             {/* Content */}
             <main className="p-4 md:p-6">{children}</main>
