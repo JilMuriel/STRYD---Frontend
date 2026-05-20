@@ -1,15 +1,15 @@
-import { logout } from "../../api/auth";
+// import { logout } from "../../api/auth";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-    const handleLogout = async () => {
-        try {
-            await logout();
-        } catch (error) {
-            console.error("Logout failed:", error);
-        } finally {
-            window.location.href = "/";
-        }
-    };
+    // const handleLogout = async () => {
+    //     try {
+    //         await logout();
+    //     } catch (error) {
+    //         console.error("Logout failed:", error);
+    //     } finally {
+    //         window.location.href = "/";
+    //     }
+    // };
 
     return (
         <div className="min-h-screen container mx-auto bg-gray-50 text-gray-900">
