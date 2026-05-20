@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Outlet } from "react-router-dom";
 import AppLayoutHeader from "./AppLayoutHeader";
 import AppLayoutLeftSidebar from "./AppLayoutLeftSidebar";
 import AppLayoutRightSidebar from "./AppLayoutRightSidebar";
@@ -17,7 +18,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         <main className="ml-[96px] mr-[300px] h-screen flex-1 overflow-y-auto px-[var(--ds-spacing-container-padding)] py-[var(--ds-spacing-xl)]">
           <div className="mx-auto max-w-[1200px] space-y-[var(--ds-spacing-lg)]">
             <AppLayoutHeader />
-            {children}
+            {children ?? <Outlet />}
           </div>
         </main>
 

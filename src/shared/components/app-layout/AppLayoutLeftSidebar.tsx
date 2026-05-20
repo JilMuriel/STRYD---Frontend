@@ -1,3 +1,10 @@
+import { NavLink } from "react-router-dom";
+
+const navItemClassName = ({ isActive }: { isActive: boolean }) =>
+  isActive
+    ? "flex scale-110 flex-col items-center gap-[var(--ds-spacing-sm)] text-primary transition-transform"
+    : "flex flex-col items-center gap-[var(--ds-spacing-sm)] rounded-xl p-[var(--ds-spacing-sm)] text-outline transition-colors hover:text-primary";
+
 const AppLayoutLeftSidebar = () => {
   return (
     <nav className="fixed left-0 top-0 z-50 flex h-full w-[96px] flex-col items-center bg-surface px-[var(--ds-spacing-sm)] py-[var(--ds-spacing-xl)] shadow-sm">
@@ -11,27 +18,27 @@ const AppLayoutLeftSidebar = () => {
 
       <div className="flex h-full flex-col items-center justify-between gap-[var(--ds-spacing-lg)]">
         <div className="flex flex-col items-center gap-[var(--ds-spacing-lg)]">
-          <a href="#" className="flex scale-110 flex-col items-center gap-[var(--ds-spacing-sm)] text-primary transition-transform">
+          <NavLink to="/app/dashboard" className={navItemClassName}>
             <div className="rounded-xl bg-primary-container/20 p-[var(--ds-spacing-sm)]">
               <span className="material-symbols-outlined">dashboard</span>
             </div>
             <span className="text-label-caps">Dashboard</span>
-          </a>
+          </NavLink>
 
-          <a href="#" className="flex flex-col items-center gap-[var(--ds-spacing-sm)] rounded-xl p-[var(--ds-spacing-sm)] text-outline transition-colors hover:text-primary">
+          <NavLink to="/app/activities" className={navItemClassName}>
             <span className="material-symbols-outlined">directions_bike</span>
             <span className="mt-[var(--ds-spacing-xs)] text-label-caps">Activities</span>
-          </a>
+          </NavLink>
 
-          <a href="#" className="flex flex-col items-center gap-[var(--ds-spacing-sm)] rounded-xl p-[var(--ds-spacing-sm)] text-outline transition-colors hover:text-primary">
+          <NavLink to="/app/analytics" className={navItemClassName}>
             <span className="material-symbols-outlined">analytics</span>
             <span className="mt-[var(--ds-spacing-xs)] text-label-caps">Analytics</span>
-          </a>
+          </NavLink>
 
-          <a href="#" className="flex flex-col items-center gap-[var(--ds-spacing-sm)] rounded-xl p-[var(--ds-spacing-sm)] text-outline transition-colors hover:text-primary">
+          <NavLink to="/app/settings" className={navItemClassName}>
             <span className="material-symbols-outlined">settings</span>
             <span className="mt-[var(--ds-spacing-xs)] text-label-caps">Settings</span>
-          </a>
+          </NavLink>
         </div>
 
         <div className="mt-auto">
