@@ -23,7 +23,7 @@ const ActivityList = ({ activities }: Props) => {
                     <div
                         key={activity.id}
                         className="flex justify-between items-center border-b pb-2"
-                        onClick={() => navigate(`/activities/${activity.id}`)}
+                        onClick={() => navigate(`/app/activities/${activity.id}`)}
                     >
                         <div>
                             <p className="font-medium">{activity.name}</p>

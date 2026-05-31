@@ -61,7 +61,7 @@ export const router = createBrowserRouter([
         ],
     },
     {
-        path: "/activities/:id",
+        path: "/app/activities/:id",
         element: (
             <ProtectedRoute>
                 <AppLayout>
