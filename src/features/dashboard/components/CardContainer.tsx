@@ -7,7 +7,7 @@ type CardContainerProps = {
 
 const CardContainer = ({ metrics }: CardContainerProps) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
       {metrics.map((metric) => (
         <MetricCard key={metric.metric} data={metric} />
       ))}

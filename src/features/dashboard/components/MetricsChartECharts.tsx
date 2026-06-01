@@ -10,6 +10,8 @@ type Props = {
     hasRide?: boolean;
     tss?: number;
   }[];
+  className?: string;
+  transparent?: boolean;
 };
 
 const getInsight = (tsb: number) => {
@@ -40,12 +42,11 @@ const getInsight = (tsb: number) => {
   };
 };
 
-const MetricsChartECharts = ({ data }: Props) => {
+const MetricsChartECharts = ({ data, className, transparent = false }: Props) => {
   const dates = data.map((d) => d.date);
   const ctl = data.map((d) => Math.round(d.ctl));
   const atl = data.map((d) => Math.round(d.atl));
   const tsb = data.map((d) => Math.round(d.tsb));
-  console.log('data charts:', data)
 
   const ridePoints = data
     .map((d) => ({
@@ -222,9 +223,17 @@ const MetricsChartECharts = ({ data }: Props) => {
 
     ],
   };
-  console.log('heeeeee:', data)
+
   return (
-    <div className="w-full h-[320px] bg-white rounded-2xl p-4 shadow-sm">
+    <div
+      className={[
+        "w-full h-[320px]",
+        transparent ? "bg-transparent p-0 shadow-none" : "bg-white rounded-2xl p-4 shadow-sm",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <ReactECharts option={option} style={{ height: "100%" }} />
     </div>
   );

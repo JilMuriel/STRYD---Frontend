@@ -70,6 +70,86 @@
   }
 }
 
+@layer utilities {
+  /*
+    Design-system utility aliases used across dashboard markup.
+    These are not default Tailwind utilities, so we define them here.
+  */
+
+  /* Spacing */
+  .mt-xs {
+    margin-top: 4px;
+  }
+
+  .mb-sm {
+    margin-bottom: 8px;
+  }
+
+  .mb-md {
+    margin-bottom: 16px;
+  }
+
+  .mb-lg {
+    margin-bottom: 24px;
+  }
+
+  .p-sm {
+    padding: 8px;
+  }
+
+  .p-md {
+    padding: 16px;
+  }
+
+  .p-lg {
+    padding: 24px;
+  }
+
+  .px-lg {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .py-md {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .pl-lg {
+    padding-left: 24px;
+  }
+
+  .gap-sm {
+    gap: 8px;
+  }
+
+  .gap-md {
+    gap: 16px;
+  }
+
+  .gap-lg {
+    gap: 24px;
+  }
+
+  /* Typography */
+  .font-h3 {
+    font-weight: 600;
+  }
+
+  .text-h3 {
+    font-size: var(--text-h3);
+    line-height: var(--text-h3--line-height);
+  }
+
+  .font-label-caps {
+    font-size: var(--text-label-caps);
+    line-height: var(--text-label-caps--line-height);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+
 .material-symbols-outlined {
   font-family: "Material Symbols Outlined";
   font-weight: normal;

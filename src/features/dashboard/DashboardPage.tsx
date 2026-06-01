@@ -3,6 +3,7 @@ import { useDashboard } from "./hooks/useDashboard";
 import RecentActivitiesTable, { type RecentActivityItem } from "./components/RecentActivitiesTable";
 import { classifyRide } from "../../shared/utils/rideClassifier";
 import type { MetricCardData } from "./types/metrics";
+import PerformanceTrendsCard from "./components/PerformanceTrendsCard";
 
 const getPreviousMetricValue = (
   chart: { ctl: number; atl: number; tsb: number }[],
@@ -81,6 +82,7 @@ const Dashboard = () => {
   return (
     <div>
       <CardContainer metrics={metricCards} />
+      <PerformanceTrendsCard chart={data.chart} />
       <RecentActivitiesTable activities={recentActivities} />
     </div>
   );
