@@ -4,6 +4,7 @@ import RecentActivitiesTable, { type RecentActivityItem } from "./components/Rec
 import { classifyRide } from "../../shared/utils/rideClassifier";
 import type { MetricCardData } from "./types/metrics";
 import PerformanceTrendsCard from "./components/PerformanceTrendsCard";
+import { generateCoachingInsights, type CoachingMetrics } from "./utils/coachingInsights";
 
 const getPreviousMetricValue = (
   chart: { ctl: number; atl: number; tsb: number }[],
@@ -13,6 +14,25 @@ const getPreviousMetricValue = (
   if (chart.length < 2) return fallback;
 
   return chart[chart.length - 2]?.[key] ?? fallback;
+};
+
+const getMetricValueDaysAgo = (
+  chart: { ctl: number; atl: number; tsb: number }[],
+  key: "ctl" | "atl" | "tsb",
+  daysAgo: number,
+  fallback: number,
+) => {
+  if (chart.length === 0) return fallback;
+
+  const index = Math.max(0, chart.length - 1 - daysAgo);
+  return chart[index]?.[key] ?? fallback;
+};
+
+const getWeeklyTSS = (data: { weeklyTSS?: number[]; recentActivities: { tss: number }[] }) => {
+  if (data.weeklyTSS?.length) return data.weeklyTSS;
+
+  const recentTotal = data.recentActivities.reduce((total, activity) => total + activity.tss, 0);
+  return recentTotal > 0 ? [recentTotal] : [];
 };
 
 const Dashboard = () => {
@@ -52,6 +72,17 @@ const Dashboard = () => {
     },
   ];
 
+  const coachingMetrics: CoachingMetrics = {
+    currentCTL: data.metrics.ctl,
+    currentATL: data.metrics.atl,
+    currentTSB: data.metrics.tsb,
+    ctl14DaysAgo: getMetricValueDaysAgo(data.chart, "ctl", 14, data.metrics.ctl),
+    ctl28DaysAgo: getMetricValueDaysAgo(data.chart, "ctl", 28, data.metrics.ctl),
+    weeklyTSS: getWeeklyTSS(data),
+  };
+
+  const coachingInsights = generateCoachingInsights(coachingMetrics);
+
   const recentActivities: RecentActivityItem[] = data.recentActivities.map((activity) => {
     const classification = classifyRide({
       distance: activity.distance,
@@ -82,7 +113,7 @@ const Dashboard = () => {
   return (
     <div>
       <CardContainer metrics={metricCards} />
-      <PerformanceTrendsCard chart={data.chart} />
+      <PerformanceTrendsCard chart={data.chart} coachingInsights={coachingInsights} />
       <RecentActivitiesTable activities={recentActivities} />
     </div>
   );

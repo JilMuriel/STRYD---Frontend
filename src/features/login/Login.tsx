@@ -2,11 +2,13 @@ import StravaIcon from '../../assets/logo/strava-icon.svg';
 import StrydIcon from './asset/stryd-icon.svg';
 // import LeftBackground from './asset/bg-left.jpg';
 import LockIcon from './asset/lock.svg'
+import { clearUserDataCache } from '../../app/queryClient';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const Login = () => {
   const handleLogin = () => {
+    clearUserDataCache();
     window.location.href = `${API_URL}/auth/strava`;
   };
 

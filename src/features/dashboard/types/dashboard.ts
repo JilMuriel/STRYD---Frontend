@@ -10,6 +10,7 @@ export type DashboardData = {
     atl: number;
     tsb: number;
   }[];
+  weeklyTSS?: number[];
   recentActivities: {
     id: string;
     name: string;

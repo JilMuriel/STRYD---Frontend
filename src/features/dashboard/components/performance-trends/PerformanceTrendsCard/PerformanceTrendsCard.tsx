@@ -4,6 +4,7 @@ import MetricsChartECharts from "../../MetricsChartECharts";
 import { ranges, weeklyLoad } from "./constants";
 import type { Props, TimeRange, WeeklyLoadItem } from "./types";
 import { sliceChartByRange, toEChartsSeriesData } from "./utils";
+import type { InsightCard as CoachingInsightCard } from "../../../utils/coachingInsights";
 
 const cx = (...parts: Array<string | undefined | false>) => parts.filter(Boolean).join(" ");
 
@@ -99,48 +100,19 @@ const WeeklyLoadBreakdown = ({ items }: WeeklyLoadBreakdownProps) => {
 };
 
 type InsightCardItem = {
-  title: string;
+  label: string;
   icon: string;
-  iconClassName: string;
-  message: string;
+  insight: CoachingInsightCard;
   variant?: "default" | "recovery";
 };
 
-const INSIGHT_CARDS: InsightCardItem[] = [
-  {
-    title: "Fitness Trend",
-    icon: "trending_up",
-    iconClassName: "text-primary",
-    message: "Improving steadily",
-  },
-  {
-    title: "Fatigue Trend",
-    icon: "warning",
-    iconClassName: "text-secondary",
-    message: "High accumulation",
-  },
-  {
-    title: "Readiness",
-    icon: "battery_2_bar",
-    iconClassName: "text-secondary",
-    message: "Heavy load",
-  },
-  {
-    title: "Projected CTL",
-    icon: "event",
-    iconClassName: "text-primary",
-    message: "110 in 14 days",
-  },
-  {
-    title: "Recovery Required",
-    icon: "bed",
-    iconClassName: "text-secondary",
-    message: "1 rest day recommended",
-    variant: "recovery",
-  },
-];
+const insightIconClassName: Record<CoachingInsightCard["severity"], string> = {
+  positive: "text-primary",
+  neutral: "text-on-surface-variant",
+  warning: "text-secondary",
+};
 
-const InsightCard = ({ title, icon, iconClassName, message, variant = "default" }: InsightCardItem) => {
+const InsightCard = ({ label, icon, insight, variant = "default" }: InsightCardItem) => {
   const containerClassName =
     variant === "recovery"
       ? "bg-secondary-container/10 border border-secondary-container/20"
@@ -152,19 +124,53 @@ const InsightCard = ({ title, icon, iconClassName, message, variant = "default" 
   return (
     <div className={cx(containerClassName, "p-md rounded-lg")}>
       <div className="flex items-center justify-between mb-1">
-        <span className={cx("font-label-caps text-[10px]", titleClassName)}>{title}</span>
-        <span className={cx("material-symbols-outlined text-[16px]", iconClassName)}>{icon}</span>
+        <span className={cx("font-label-caps text-[10px]", titleClassName)}>{label}</span>
+        <span className={cx("material-symbols-outlined text-[16px]", insightIconClassName[insight.severity])}>
+          {icon}
+        </span>
       </div>
-      <p className={cx("font-body-sm text-[13px] font-semibold", messageClassName)}>{message}</p>
+      <p className={cx("font-body-sm text-[13px] font-semibold", messageClassName)}>{insight.title}</p>
+      <p className="mt-1 font-body-sm text-[12px] leading-snug text-on-surface-variant">{insight.description}</p>
     </div>
   );
 };
 
-const PerformanceTrendsCard = ({ chart }: Props) => {
+const PerformanceTrendsCard = ({ chart, coachingInsights }: Props) => {
   const [range, setRange] = useState<TimeRange>("3M");
 
   const filteredChart = useMemo(() => sliceChartByRange(chart, range), [chart, range]);
   const seriesData = useMemo(() => toEChartsSeriesData(filteredChart), [filteredChart]);
+  const insightCards = useMemo<InsightCardItem[]>(
+    () => [
+      {
+        label: "Fitness Trend",
+        icon: "trending_up",
+        insight: coachingInsights.fitnessTrend,
+      },
+      {
+        label: "Fatigue Trend",
+        icon: "warning",
+        insight: coachingInsights.fatigueTrend,
+      },
+      {
+        label: "Readiness",
+        icon: "battery_2_bar",
+        insight: coachingInsights.readiness,
+      },
+      {
+        label: "Projected CTL",
+        icon: "event",
+        insight: coachingInsights.projectedCTL,
+      },
+      {
+        label: "Recovery Required",
+        icon: "bed",
+        insight: coachingInsights.recovery,
+        variant: "recovery",
+      },
+    ],
+    [coachingInsights],
+  );
 
   return (
     <div className="py-[24px] flex flex-col lg:flex-row gap-lg">
@@ -195,8 +201,8 @@ const PerformanceTrendsCard = ({ chart }: Props) => {
       <div className="w-full lg:w-[280px] flex flex-col gap-sm border-l border-outline-variant/10 pl-lg">
         <span className="font-label-caps text-[11px] text-primary font-bold mb-1">COACHING INSIGHTS</span>
 
-        {INSIGHT_CARDS.map((card) => (
-          <InsightCard key={card.title} {...card} />
+        {insightCards.map((card) => (
+          <InsightCard key={`${card.label}-${card.insight.title}`} {...card} />
         ))}
 
       </div>

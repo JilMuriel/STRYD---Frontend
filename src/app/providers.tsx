@@ -1,19 +1,23 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { clearUserDataCache, queryClient } from "./queryClient";
 
-const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {
-            retry: 1,
-            staleTime: 60_000,
-            refetchOnWindowFocus: false,
-        },
-    },
-});
+const AuthCacheBoundary = ({ children }: { children: React.ReactNode }) => {
+  useEffect(() => {
+    window.addEventListener("auth:logout", clearUserDataCache);
+
+    return () => {
+      window.removeEventListener("auth:logout", clearUserDataCache);
+    };
+  }, []);
+
+  return <>{children}</>;
+};
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <QueryClientProvider client={queryClient} >
-            {children}
-        </QueryClientProvider>
-    );
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthCacheBoundary>{children}</AuthCacheBoundary>
+    </QueryClientProvider>
+  );
 };
