@@ -1,6 +1,12 @@
 import ReactECharts from "echarts-for-react";
 import { formatDate } from "../../../shared/utils/dateFormater";
 
+type TooltipAxisParam = {
+  seriesName: string;
+  value: number;
+  axisValue: string;
+};
+
 type Props = {
   data: {
     date: string;
@@ -75,12 +81,12 @@ const MetricsChartECharts = ({ data, className, transparent = false }: Props) =>
       textStyle: {
         color: "#111827",
       },
-      formatter: (params: any) => {
-        const ctl = params.find((p: any) => p.seriesName === "Fitness")?.value;
-        const atl = params.find((p: any) => p.seriesName === "Fatigue")?.value;
-        const tsb = params.find((p: any) => p.seriesName === "Form")?.value;
+      formatter: (params: TooltipAxisParam[]) => {
+        const ctl = params.find((p) => p.seriesName === "Fitness")?.value ?? 0;
+        const atl = params.find((p) => p.seriesName === "Fatigue")?.value ?? 0;
+        const tsb = params.find((p) => p.seriesName === "Form")?.value ?? 0;
 
-        const formattedDate = formatDate(params[0].axisValue);
+        const formattedDate = formatDate(params[0]?.axisValue ?? "");
 
         const insight = getInsight(tsb);
 

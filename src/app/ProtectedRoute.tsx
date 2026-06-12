@@ -3,10 +3,7 @@ import { useDashboard } from "../features/dashboard/hooks/useDashboard";
 import LoadingScreen from '../shared/components/LoadingSpinner';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-    const { data, isLoading, isError } = useDashboard();
-
-    console.log("isError", isError);
-    console.log("data", data);
+    const { isLoading, isError } = useDashboard();
 
     if (isLoading) return <LoadingScreen />;
 
