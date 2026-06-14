@@ -116,7 +116,7 @@ const ActivityDetailsPage = () => {
           <div className="bg-white rounded-2xl p-4 shadow-sm">
             <p className="text-sm text-gray-500">Avg Power</p>
             <p className="text-lg font-semibold">
-              {data.avgPower ? `${Math.round(data.avgPower)} W` : "-"}
+              {data.averagePower ? `${Math.round(data.averagePower)} W` : "-"}
             </p>
           </div>
 

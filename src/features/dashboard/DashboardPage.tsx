@@ -1,10 +1,21 @@
+import { Suspense, lazy, useMemo } from "react";
 import CardContainer from "./components/CardContainer";
 import { useDashboard } from "./hooks/useDashboard";
-import RecentActivitiesTable, { type RecentActivityItem } from "./components/RecentActivitiesTable";
+import type { RecentActivityItem } from "./components/RecentActivitiesTable";
 import { classifyRide } from "../../shared/utils/rideClassifier";
 import type { MetricCardData } from "./types/metrics";
-import PerformanceTrendsCard from "./components/PerformanceTrendsCard";
 import { generateCoachingInsights, type CoachingMetrics } from "./utils/coachingInsights";
+
+const PerformanceTrendsCard = lazy(() => import("./components/PerformanceTrendsCard"));
+const RecentActivitiesTable = lazy(() => import("./components/RecentActivitiesTable"));
+
+const ChartSkeleton = () => (
+  <div className="bg-surface-container-lowest rounded-xl p-6 shadow-[0_20px_40px_rgba(23,29,28,0.03)] min-h-90 animate-pulse" />
+);
+
+const ActivitiesSkeleton = () => (
+  <div className="bg-surface-container-lowest rounded-xl p-6 shadow-[0_20px_40px_rgba(23,29,28,0.03)] min-h-80 animate-pulse" />
+);
 
 const getPreviousMetricValue = (
   chart: { ctl: number; atl: number; tsb: number }[],
@@ -50,71 +61,87 @@ const Dashboard = () => {
     return <div>No data available</div>;
   }
 
-  const metricCards: MetricCardData[] = [
-    {
-      title: "Fitness (CTL)",
-      metric: "CTL",
-      value: data.metrics.ctl,
-      previousValue: getPreviousMetricValue(data.chart, "ctl", data.metrics.ctl),
-      target: 110,
-    },
-    {
-      title: "Fatigue (ATL)",
-      metric: "ATL",
-      value: data.metrics.atl,
-      previousValue: getPreviousMetricValue(data.chart, "atl", data.metrics.atl),
-    },
-    {
-      title: "Form (TSB)",
-      metric: "TSB",
-      value: data.metrics.tsb,
-      previousValue: getPreviousMetricValue(data.chart, "tsb", data.metrics.tsb),
-    },
-  ];
+  const metricCards = useMemo<MetricCardData[]>(
+    () => [
+      {
+        title: "Fitness (CTL)",
+        metric: "CTL",
+        value: data.metrics.ctl,
+        previousValue: getPreviousMetricValue(data.chart, "ctl", data.metrics.ctl),
+        target: 110,
+      },
+      {
+        title: "Fatigue (ATL)",
+        metric: "ATL",
+        value: data.metrics.atl,
+        previousValue: getPreviousMetricValue(data.chart, "atl", data.metrics.atl),
+      },
+      {
+        title: "Form (TSB)",
+        metric: "TSB",
+        value: data.metrics.tsb,
+        previousValue: getPreviousMetricValue(data.chart, "tsb", data.metrics.tsb),
+      },
+    ],
+    [data],
+  );
 
-  const coachingMetrics: CoachingMetrics = {
+  const coachingMetrics = useMemo<CoachingMetrics>(() => ({
     currentCTL: data.metrics.ctl,
     currentATL: data.metrics.atl,
     currentTSB: data.metrics.tsb,
     ctl14DaysAgo: getMetricValueDaysAgo(data.chart, "ctl", 14, data.metrics.ctl),
     ctl28DaysAgo: getMetricValueDaysAgo(data.chart, "ctl", 28, data.metrics.ctl),
     weeklyTSS: getWeeklyTSS(data),
-  };
+  }), [data]);
 
-  const coachingInsights = generateCoachingInsights(coachingMetrics);
+  const coachingInsights = useMemo(
+    () => generateCoachingInsights(coachingMetrics),
+    [coachingMetrics],
+  );
 
-  const recentActivities: RecentActivityItem[] = data.recentActivities.map((activity) => {
-    const classification = classifyRide({
-      distance: activity.distance,
-      movingTime: activity.movingTime ?? activity.duration,
-      duration: activity.duration,
-      elevationGain: activity.elevationGain,
-      tss: activity.tss,
-      intensityFactor: activity.intensityFactor,
-      averagePower: activity.averagePower,
-      averageSpeed: activity.averageSpeed,
-      activityType: activity.activityType,
-    });
+  const recentActivities = useMemo<RecentActivityItem[]>(
+    () =>
+      data.recentActivities.map((activity) => {
+        const classification = classifyRide({
+          distance: activity.distance,
+          movingTime: activity.movingTime ?? activity.duration,
+          duration: activity.duration,
+          elevationGain: activity.elevationGain,
+          tss: activity.tss,
+          intensityFactor: activity.intensityFactor,
+          averagePower: activity.averagePower,
+          averageSpeed: activity.averageSpeed,
+          activityType: activity.activityType,
+        });
 
-    return {
-      id: activity.id,
-      title: activity.name,
-      type: classification.label,
-      date: "Recent",
-      distance: `${(activity.distance / 1000).toFixed(1)} km`,
-      tss: Math.round(activity.tss),
-      icon: classification.icon,
-      iconContainerClassName: `w-10 h-10 rounded-lg flex items-center justify-center ${classification.color}`,
-      iconClassName: "material-symbols-outlined text-sm",
-      tooltip: classification.label,
-    };
-  });
+        return {
+          id: activity.id,
+          title: activity.name,
+          type: classification.label,
+          date: "Recent",
+          distance: `${(activity.distance / 1000).toFixed(1)} km`,
+          tss: Math.round(activity.tss),
+          icon: classification.icon,
+          iconContainerClassName: `w-10 h-10 rounded-lg flex items-center justify-center ${classification.color}`,
+          iconClassName: "material-symbols-outlined text-sm",
+          tooltip: classification.label,
+        };
+      }),
+    [data],
+  );
 
   return (
     <div>
       <CardContainer metrics={metricCards} />
-      <PerformanceTrendsCard chart={data.chart} coachingInsights={coachingInsights} />
-      <RecentActivitiesTable activities={recentActivities} />
+
+      <Suspense fallback={<ChartSkeleton />}>
+        <PerformanceTrendsCard chart={data.chart} coachingInsights={coachingInsights} />
+      </Suspense>
+
+      <Suspense fallback={<ActivitiesSkeleton />}>
+        <RecentActivitiesTable activities={recentActivities} />
+      </Suspense>
     </div>
   );
 };

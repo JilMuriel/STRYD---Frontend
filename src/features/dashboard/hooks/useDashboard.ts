@@ -6,6 +6,6 @@ export const useDashboard = () => {
   return useQuery<DashboardData>({
     queryKey: ["dashboard"],
     queryFn: getDashboard,
-    staleTime: 0,
+    staleTime: 5 * 60 * 1000, // cache for 5 minutes
   });
 };

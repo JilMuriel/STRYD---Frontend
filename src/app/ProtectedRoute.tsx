@@ -3,7 +3,7 @@ import { useDashboard } from "../features/dashboard/hooks/useDashboard";
 import LoadingScreen from '../shared/components/LoadingSpinner';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-    const { isLoading, isError } = useDashboard();
+    const { data, isLoading, isError } = useDashboard();
 
     if (isLoading) return <LoadingScreen />;
 
@@ -13,9 +13,9 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     }
 
     // ✅ THEN: handle no data
-    // if (!data) {
-    //     return <div>No data</div>;
-    // }
+    if (!data) {
+        return <div>No data</div>;
+    }
 
     return <>{children}</>;
 };

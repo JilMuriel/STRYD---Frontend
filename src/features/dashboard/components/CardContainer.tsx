@@ -1,3 +1,4 @@
+import { memo } from "react";
 import MetricCard from "./MetricCard";
 import type { MetricCardData } from "../types/metrics";
 
@@ -15,4 +16,4 @@ const CardContainer = ({ metrics }: CardContainerProps) => {
   );
 };
 
-export default CardContainer;
+export default memo(CardContainer);

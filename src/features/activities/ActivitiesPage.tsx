@@ -6,7 +6,7 @@ import ActivityList from "./components/ActivityList";
 
 const ActivitiesPage = () => {
   const navigate = useNavigate();
-  const { data, isLoading, isError } = useDashboard();
+  const { data, isLoading } = useDashboard();
 
   if (isLoading) {
     return <LoadingScreen message="Loading activities..." />;
