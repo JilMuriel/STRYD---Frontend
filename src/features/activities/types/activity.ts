@@ -1,11 +1,20 @@
-export type ActivityDetails = {
+export type Activity = {
   id: string;
   name: string;
   distance: number;
   duration: number;
   tss: number;
-  avgPower?: number | null;
+  movingTime?: number;
+  elevationGain?: number;
+  intensityFactor?: number | null;
+  averagePower?: number | null;
+  averageSpeed?: number;
+  activityType?: string;
+  date?: string;
+  startTime?: string;
+};
 
+export type ActivityDetails = Activity & {
   insight: {
     type: string;
     fatigue: string;

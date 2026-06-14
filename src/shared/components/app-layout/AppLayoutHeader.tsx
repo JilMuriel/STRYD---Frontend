@@ -1,9 +1,14 @@
-const AppLayoutHeader = () => {
+type AppLayoutHeaderProps = {
+  title: string;
+  description: string;
+};
+
+const AppLayoutHeader = ({ title, description }: AppLayoutHeaderProps) => {
   return (
     <header className="mb-[var(--ds-spacing-xl)] flex items-end justify-between">
       <div>
-        <h1 className="mb-[var(--ds-spacing-xs)] text-h1 font-medium">Cycling Progress</h1>
-        <p className="text-body-md text-on-surface-variant">Your performance analytics at a glance.</p>
+        <h1 className="mb-[var(--ds-spacing-xs)] text-h1 font-medium">{title}</h1>
+        <p className="text-body-md text-on-surface-variant">{description}</p>
       </div>
       <div className="flex gap-[var(--ds-spacing-md)]">
         <button className="flex h-12 items-center gap-[var(--ds-spacing-sm)] rounded-full bg-secondary-container/10 px-[var(--ds-spacing-lg)] font-semibold text-secondary transition-colors hover:bg-secondary-container/20">
